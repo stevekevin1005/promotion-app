@@ -16,5 +16,8 @@ Route::get('/logout', ['uses' => 'LoginController@logout', 'as' => 'logout']);
 Route::post('/login', ['uses' => 'LoginController@indexCheck', 'as' => 'loginCheck']);
 
 Route::group(['middleware' => 'auth.login'], function () {
-    Route::get('/', ['uses' => 'IndexController@index', 'as' => 'index']);
+    Route::get('/', function() {
+        return redirect('class/list');
+    });
+    Route::get('/class/list', ['uses' => 'ClassController@index', 'as' => 'index']);
 });
