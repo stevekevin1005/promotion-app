@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/login', ['uses' => 'LoginController@index', 'as' => 'login']);
+Route::get('/logout', ['uses' => 'LoginController@logout', 'as' => 'logout']);
+Route::post('/login', ['uses' => 'LoginController@indexCheck', 'as' => 'loginCheck']);
+
+Route::group(['middleware' => 'auth.login'], function () {
+    Route::get('/', ['uses' => 'IndexController@index', 'as' => 'index']);
 });
