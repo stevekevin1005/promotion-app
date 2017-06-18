@@ -25,3 +25,10 @@ Route::group(['middleware' => 'auth.login'], function () {
 
   Route::get('/shop/list', ['uses' => 'ShopController@index', 'as' => 'shop.list']);
 });
+
+Route::group(['prefix' => 'api', 'as' => 'api'], function(){
+	Route::get('class/', ['uses' => 'ClassController@big_api', 'as' => 'api.class.big.list']);
+	Route::get('class/{id}', ['uses' => 'ClassController@api', 'as' => 'api.class.list']);
+	Route::get('class/{id}/list', ['uses' => 'ShopController@shop_list_api', 'as' => 'api.class.shop.list']);
+	Route::get('shop/{id}', ['uses' => 'ShopController@shop_detail_api', 'as' => 'api.class.shop.detail']);
+});

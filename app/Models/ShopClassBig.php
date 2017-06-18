@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ShopClass extends Model {
+class ShopClassBig extends Model {
 
-  protected $table = 'ShopClassSmall';
+  protected $table = 'ShopClassBig';
 
 }

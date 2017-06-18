@@ -29,4 +29,38 @@ class ShopController extends Controller
 		return view('shop.list', $view_data);
 	}
 
+	public function shop_list_api(Request $request, $id)
+	{
+		$shops = new Shop;
+		$shop_list = $shops->where('shop_class_id', $id)->get();
+
+		$result = array();
+		foreach ($shop_list as $key => $shop) {
+			$obj['id'] = $shop->id;
+			$obj['name'] = $shop->name;
+			$obj['photo'] = $shop->photo;
+			$obj['description'] = $shop->name;
+			$obj['price'] = $shop->price;
+			$result[] = $obj;
+		}
+
+		return response()->json($result);
+	}
+
+	public function shop_detail_api(Request $request, $id)
+	{
+		$shops = new Shop;
+		$shop_detail = $shops->where('id', $id)->first();
+
+		$result['id'] = $shop_detail->id;
+		$result['name'] = $shop_detail->name;
+		$result['photo'] = explode(",", $shop_detail->cover_photo);
+		$result['location'] = $shop_detail->location;
+		$result['content'] = $shop_detail->content;
+		$result['phone'] = $shop_detail->phone;
+		$result['remark'] = $shop_detail->remark;
+
+		return response()->json($result);
+	}
+
 }
