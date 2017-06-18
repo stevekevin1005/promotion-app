@@ -20,7 +20,7 @@ class LoginController extends Controller
 		if (Hash::check($request->password, $user->password))
 		{
 		  $request->session()->put('name', $request->name);
-		  return redirect()->route('index');
+		  return redirect()->route('class.list');
 		}
 		return redirect('/login')->withErrors(['fail'=>'Name or password is wrong!']);
 	}

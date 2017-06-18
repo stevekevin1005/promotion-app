@@ -22,4 +22,6 @@ Route::group(['middleware' => 'auth.login'], function () {
   Route::get('/class/list', ['uses' => 'ClassController@index', 'as' => 'class.list']);
   Route::post('/class/create', ['uses' => 'ClassController@create', 'as' => 'class.create']);
   Route::post('/class/delete', ['uses' => 'ClassController@delete', 'as' => 'class.delete']);
+
+  Route::get('/shop/list', ['uses' => 'ShopController@index', 'as' => 'shop.list']);
 });

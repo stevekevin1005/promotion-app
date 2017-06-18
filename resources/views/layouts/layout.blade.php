@@ -33,6 +33,9 @@
 				<li>
 					<a href="/shop/list">商家管理</a>
 				</li>
+				<li>
+					<a href="/member/list">成員管理</a>
+				</li>
 			</ul>
 		</div>
 		<div id="page-content-wrapper">
