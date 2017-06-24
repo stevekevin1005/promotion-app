@@ -20,9 +20,10 @@ Route::group(['middleware' => 'auth.login'], function () {
       return redirect('class/list');
   });
   Route::get('/class/list', ['uses' => 'ClassController@index', 'as' => 'class.list']);
-  Route::post('/class/create', ['uses' => 'ClassController@create', 'as' => 'class.create']);
-  Route::post('/class/delete', ['uses' => 'ClassController@delete', 'as' => 'class.delete']);
-
+  Route::post('/class/big/create', ['uses' => 'ClassController@big_create', 'as' => 'class.big.create']);
+  Route::post('/class/small/create', ['uses' => 'ClassController@small_create', 'as' => 'class.small.create']);
+  Route::post('/class/small/delete', ['uses' => 'ClassController@small_delete', 'as' => 'class.small.delete']);
+  Route::post('/class/big/delete',  ['uses' => 'ClassController@big_delete', 'as' => 'class.big.delete']);
   Route::get('/shop/list', ['uses' => 'ShopController@index', 'as' => 'shop.list']);
 });
 

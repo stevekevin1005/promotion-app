@@ -38,16 +38,21 @@ class ClassController extends Controller
 
 	public function index()
 	{
-		$class = new ShopClass;
-		$class = $class->paginate(5);
-		
-		return view('class.list', ['class_list' => $class]);
+		$class_big = ShopClassBig::all();
+		$view_data['class_list'] = $class_big;
+
+		$class_small = ShopClass::all();
+
+		foreach ($class_small as $key => $class) {
+			$view_data['class_small_list'][$class->ShopClassBigid][] = $class;
+		}
+		return view('class.list', $view_data);
 	}
 
-	public function create(Request $request)
+	public function big_create(Request $request)
 	{
 		try{
-			$class = new ShopClass;
+			$class = new ShopClassBig;
 			$class->name = $request->name;
 			$class->save();
 			return redirect('/class/list');
@@ -57,17 +62,51 @@ class ClassController extends Controller
 		}
 	}
 
-	public function delete(Request $request)
+	public function small_create(Request $request)
 	{
 		try{
 			$class = new ShopClass;
-			$class = $class->where('id', $request->id);
-			$class->delete();
-
+			$class->name = $request->name;
+			$class->ShopClassBigid = $request->id;
+			$class->save();
 			return redirect('/class/list');
 		}
 		catch(Exception $e){
-			return redirect('/class/list')->withErrors(['msg'=>'刪除失敗']);
+			return redirect('/class/list')->withErrors(['msg'=>'新增失敗']);
+		}
+	}
+
+	public function small_delete(Request $request)
+	{
+		try{
+			$class = new ShopClass;
+			$class = $class->where('id', $request->id)->first();
+			$class->shops()->delete();
+			$class->delete();
+			return response()->json('刪除成功');
+		}
+		catch(Exception $e){
+			return response()->json('刪除失敗 請洽系統管理商');
+		}
+	}
+
+	public function big_delete(Request $request)
+	{
+		try{
+			$class = new ShopClassBig;
+			$class = $class->where('id', $request->id)->first();
+			//shop
+			$small_clss_list = $class->small_classes()->get();
+			foreach ($small_clss_list as $small_clss) {
+				$small_clss->shops()->delete();
+			}
+			//small class
+			$class->small_classes()->delete();
+			$class->delete();
+			return response()->json('刪除成功');
+		}
+		catch(Exception $e){
+			return response()->json('刪除失敗 請洽系統管理商');
 		}
 	}
 }
