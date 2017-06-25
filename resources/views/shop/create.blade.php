@@ -6,10 +6,28 @@
 		<div class="right-bar">
 			<h3>商家建立表單</h3>
 			<form>
+				{{ csrf_field() }}
 				<div class="form-group">
 			    <div class="input-group col-md-5">
-			      <div class="input-group-addon">大類別</div>
-			      <input name="name" type="text" class="form-control" placeholder="ex: 哈哈燒臘" required>
+			      <div class="input-group-addon">主類別</div>
+			      <select class="form-control big_class">
+			      	<option disabled selected value >請選擇</option>
+		        	@foreach ($big_class_list as $big_class)
+		        	<option value="{{ $big_class->id }}"  <?php 
+		        	if ($big_class->id == Input::get('big_class')){ ?>selected<?php } ?> >{{ $big_class->name }}</option>
+							@endforeach       	
+		        </select>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="input-group col-md-5">
+			      <div class="input-group-addon">次類別</div>
+			      <select class="form-control" name="shop_class_id" required>
+		        	<option disabled selected value >請選擇</option>
+		        	@foreach ($class_list as $class)
+		        	<option value="{{ $class->id }}" class="sub-class big-class-{{ $class->ShopClassBigid }}" <?php if ($class->id == Input::get('class')){ ?>selected<?php } ?> style="display: none;">{{ $class->name }}</option>
+							@endforeach       	
+		        </select>
 			    </div>
 			  </div>
 			  <div class="form-group">
@@ -60,4 +78,15 @@
 		</div>
 	</div>
 </div>
+@stop
+
+@section('script')
+<script type="text/javascript">
+	$('.big_class').on('change', function(){
+		var big_id = $(this).val();
+		$('.sub-class').hide();
+		$('.big-class-'+big_id).show();
+	});
+
+</script>
 @stop
