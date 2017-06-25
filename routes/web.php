@@ -19,12 +19,19 @@ Route::group(['middleware' => 'auth.login'], function () {
   Route::get('/', function() {
       return redirect('class/list');
   });
-  Route::get('/class/list', ['uses' => 'ClassController@index', 'as' => 'class.list']);
-  Route::post('/class/big/create', ['uses' => 'ClassController@big_create', 'as' => 'class.big.create']);
-  Route::post('/class/small/create', ['uses' => 'ClassController@small_create', 'as' => 'class.small.create']);
-  Route::post('/class/small/delete', ['uses' => 'ClassController@small_delete', 'as' => 'class.small.delete']);
-  Route::post('/class/big/delete',  ['uses' => 'ClassController@big_delete', 'as' => 'class.big.delete']);
-  Route::get('/shop/list', ['uses' => 'ShopController@index', 'as' => 'shop.list']);
+
+  Route::group(['prefix' => 'class'], function(){
+    Route::get('list', ['uses' => 'ClassController@index', 'as' => 'class.list']);
+    Route::post('big/create', ['uses' => 'ClassController@big_create', 'as' => 'class.big.create']);
+    Route::post('small/create', ['uses' => 'ClassController@small_create', 'as' => 'class.small.create']);
+    Route::post('small/delete', ['uses' => 'ClassController@small_delete', 'as' => 'class.small.delete']);
+    Route::post('big/delete',  ['uses' => 'ClassController@big_delete', 'as' => 'class.big.delete']);
+  });
+
+  Route::group(['prefix' => 'shop'], function(){
+    Route::get('list', ['uses' => 'ShopController@index', 'as' => 'shop.list']);
+    Route::get('create', ['uses' => 'ShopController@create_index', 'as' => 'shop.create_index']);
+  });
 });
 
 Route::group(['prefix' => 'api', 'as' => 'api'], function(){

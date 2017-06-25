@@ -21,7 +21,6 @@
 			  <div class="form-group">
 			    <label for="exampleInputName2">次類別名稱</label>
 			    <select class="form-control" name="id" required>
-			    	<option>請選擇主類別</option>
 			    	@foreach ($class_list as $class)
 			    	<option value="{{ $class->id }}">{{ $class->name }}</option>
 			    	@endforeach

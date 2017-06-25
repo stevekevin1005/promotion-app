@@ -11,9 +11,11 @@ class ShopController extends Controller
 {
 	public function index(Request $request)
 	{
-		$class = new ShopClass;
-		$class = $class->all();
+		$class = ShopClass::all();
+		$big_class = ShopClassBig::all();
+
 		$view_data['class_list'] = $class;
+		$view_data['big_class_list'] = $big_class;
 
 		$class_id = $request->class;
 
@@ -28,6 +30,17 @@ class ShopController extends Controller
 		$view_data['shop_list'] = $shop_list;
 
 		return view('shop.list', $view_data);
+	}
+
+	public function create_index(Request $request)
+	{
+		$class = ShopClass::all();
+		$big_class = ShopClassBig::all();
+
+		$view_data['class_list'] = $class;
+		$view_data['big_class_list'] = $big_class;
+		
+		return view('shop.create', $view_data);
 	}
 
 	public function shop_list_api(Request $request, $id)
@@ -63,5 +76,6 @@ class ShopController extends Controller
 
 		return response()->json($result);
 	}
+
 
 }
