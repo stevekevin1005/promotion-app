@@ -12,16 +12,16 @@
 
 					<div class="input-group">
 						<label class="input-group-addon">主類別</label>
-						<select class="form-control big_class" name="big_class" value="{{ Input::get('big_class',Session::get('big_class')) }}">
-		        	<option value="">請選擇</option>
+						<select class="form-control big_class" name="big_class" value="{{ Input::get('big_class',Session::get('big_class')) }}" required>
+		        	<option  disabled selected value >請選擇</option>
 		        	@foreach ($big_class_list as $big_class)
 		        	<option value="{{ $big_class->id }}"  <?php 
 		        	if ($big_class->id == Input::get('big_class')){ ?>selected<?php } ?> >{{ $big_class->name }}</option>
 							@endforeach       	
 		        </select>
 						<label class="input-group-addon">次類別</label>
-						<select class="form-control" name="class">
-		        	<option value="">請選擇</option>
+						<select class="form-control" name="class" required>
+		        	<option  disabled selected value >請選擇</option>
 		        	@foreach ($class_list as $class)
 		        	<option value="{{ $class->id }}" class="sub-class big-class-{{ $class->ShopClassBigid }}" <?php if ($class->id == Input::get('class')){ ?>selected<?php } ?> >{{ $class->name }}</option>
 							@endforeach       	
@@ -43,11 +43,8 @@
       <tr>
         <td>{{ $shop->name }}</td>
         <td style="text-align: right;">
-        	<form class="form-inline" action="/shop/delete" method="post">
-			  		{{ csrf_field() }}
-			  		<input type="hidden" name="id" value="{{ $shop->id }}">
-						<button type="submit" class="btn btn-danger" data-id="{{ $shop->id }}">刪除店家</button>
-					</form>
+        	<a href="/shop/update/{{ $shop->id }}"><button class="btn btn-primary" >更新店家</button></a>
+					<button class="btn btn-danger shop_delete" data-id="{{ $shop->id }}">刪除店家</button>
         </td>
     	<tr>
     	@endforeach
@@ -63,5 +60,26 @@
 		$('.big-class-'+big_id).show();
 	});
 
+	$(".shop_delete").on('click', function(){
+		var shop_id = $(this).data('id');
+		if (confirm("確定刪除該店家嗎?"))
+		{
+		  $.ajax({
+		  	url: '/shop/delete',
+		  	type: 'post',
+		  	data: {
+		  		id: shop_id
+		  	},
+		  	success: function(res){
+		  		alert(res);
+		  		location.reload();
+		  	},
+		  	error: function(res){
+		  		alert(res);
+		  		location.reload();
+		  	}
+		  });
+		}
+	});	
 </script>
 @stop

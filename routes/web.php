@@ -31,6 +31,14 @@ Route::group(['middleware' => 'auth.login'], function () {
   Route::group(['prefix' => 'shop'], function(){
     Route::get('list', ['uses' => 'ShopController@index', 'as' => 'shop.list']);
     Route::get('create', ['uses' => 'ShopController@create_index', 'as' => 'shop.create_index']);
+    Route::get('update/{id}', ['uses' => 'ShopController@update_index', 'as' => 'shop.update_index']);
+    Route::post('create', ['uses' => 'ShopController@create', 'as' => 'shop.create']);
+    Route::post('delete', ['uses' => 'ShopController@delete', 'as' => 'shop.delete']);
+    Route::post('update/{id}', ['uses' => 'ShopController@update', 'as' => 'shop.update']);
+  });
+
+  Route::group(['prefix' => 'member'], function() {
+      Route::get('list', ['uses' => 'MemberController@member_list', 'as' => 'member.list']);
   });
 });
 
