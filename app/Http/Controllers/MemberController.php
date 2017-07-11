@@ -7,7 +7,7 @@ use App\Models\User;
 
 class MemberController extends Controller
 {
-	public function member_list()
+	public function member_list ()
 	{
 		return view('welcome');
 	}
