@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 
 @section('main_content')
-	@if ($errors->has('fail'))
-  <h4 style="color:red;">{{ $errors->first('fail') }}</h4> 
+	@if ($errors->has('msg'))
+  <h4 style="color:red;">{{ $errors->first('msg') }}</h4> 
   @endif
 	<div class="row">
 		<div class="col-md-6">

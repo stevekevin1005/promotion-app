@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 
 @section('main_content')
-	@if ($errors->has('fail'))
-  <h4 style="color:red;">{{ $errors->first('fail') }}</h4> 
+	@if ($errors->has('msg'))
+  <h4 style="color:red;">{{ $errors->first('msg') }}</h4> 
   @endif
 	<section class="form-horizontal row" style="">
 		<div class="col-md-6 col-md-offset-3">
@@ -12,16 +12,16 @@
 
 					<div class="input-group">
 						<label class="input-group-addon">主類別</label>
-						<select class="form-control big_class" name="big_class" value="{{ Input::get('big_class',Session::get('big_class')) }}" required>
-		        	<option  disabled selected value >請選擇</option>
+						<select class="form-control big_class" name="big_class" value="{{ Input::get('big_class',Session::get('big_class')) }}">
+		        	<option value="">請選擇</option>
 		        	@foreach ($big_class_list as $big_class)
 		        	<option value="{{ $big_class->id }}"  <?php 
 		        	if ($big_class->id == Input::get('big_class')){ ?>selected<?php } ?> >{{ $big_class->name }}</option>
 							@endforeach       	
 		        </select>
 						<label class="input-group-addon">次類別</label>
-						<select class="form-control" name="class" required>
-		        	<option  disabled selected value >請選擇</option>
+						<select class="form-control" name="class" id="small_class">
+		        	<option value="">請選擇</option>
 		        	@foreach ($class_list as $class)
 		        	<option value="{{ $class->id }}" class="sub-class big-class-{{ $class->ShopClassBigid }}" <?php if ($class->id == Input::get('class')){ ?>selected<?php } ?> >{{ $class->name }}</option>
 							@endforeach       	
@@ -36,11 +36,15 @@
 	<div class="row">
 		<table class="table table-striped" style="margin-top: 30px;">
 		 	<thead>
+		 		<th>主類別</th>
+		 		<th>次類別</th>
 		 		<th>商店名稱</th>
 		 		<th></th>
 		 	</thead>
 		 	@foreach ($shop_list as $shop)
       <tr>
+      	<td>{{ $shop->big_class()->first()->name  }}</td>
+      	<td>{{ $shop->small_class()->first()->name }}</td>
         <td>{{ $shop->name }}</td>
         <td style="text-align: right;">
         	<a href="/shop/update/{{ $shop->id }}"><button class="btn btn-primary" >更新店家</button></a>
@@ -49,6 +53,7 @@
     	<tr>
     	@endforeach
 		</table>
+		{!! $shop_list->appends(['big_class' => Request::query('big_class'), 'class' => Request::query('class')])->links() !!}
 	</div>
 @stop
 
@@ -58,6 +63,7 @@
 		var big_id = $(this).val();
 		$('.sub-class').hide();
 		$('.big-class-'+big_id).show();
+		$('#small_class').prop('selectedIndex', 0);
 	});
 
 	$(".shop_delete").on('click', function(){

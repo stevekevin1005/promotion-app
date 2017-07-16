@@ -13,4 +13,8 @@ class Shop extends Model {
     return $this->belongsTo('App\Models\ShopClass', 'shop_class_id');
   }
 
+  public function big_class()
+  {
+    return $this->belongsTo('App\Models\ShopClassBig', 'shop_class_big_id');
+  }
 }

@@ -48,3 +48,5 @@ Route::group(['prefix' => 'api', 'as' => 'api'], function(){
 	Route::get('class/{id}/list', ['uses' => 'ShopController@shop_list_api', 'as' => 'api.class.shop.list']);
 	Route::get('shop/{id}', ['uses' => 'ShopController@shop_detail_api', 'as' => 'api.class.shop.detail']);
 });
+
+Route::any('image/upload', ['uses' => 'ImageController@upload']);

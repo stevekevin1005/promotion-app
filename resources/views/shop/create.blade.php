@@ -50,9 +50,9 @@
 			    <div class="input-group col-md-5">
 			      <div class="input-group-addon">商家名稱</div>
 			      @if(isset($shop))
-						<input name="name" type="text" class="form-control" placeholder="ex: 哈哈燒臘" value="{{ $shop-> name }}" required>
+						<input name="name" type="text" class="form-control" placeholder="ex: Stevia 網路工作室 (限20字)" value="{{ $shop-> name }}" maxlength="20" required>
 						@else
-						<input name="name" type="text" class="form-control" placeholder="ex: 哈哈燒臘" required>
+						<input name="name" type="text" class="form-control" placeholder="ex: Stevia 網路工作室 (限20字)" maxlength="20" required>
 						@endif
 			      
 			    </div>
@@ -137,11 +137,13 @@
 			    <div class="input-group">
 			      <div class="input-group-addon">商家優惠細項 (商家優惠畫面顯示)</div>
 			      @if(isset($shop))
-			      <textarea name="content" placeholder="ex: 1.所有套餐優惠100元
+			      <textarea name="content" id="bodyField" placeholder="ex: 1.所有套餐優惠100元
       2.出示此app才可享有此優惠" class="form-control" required>{{ $shop->content }}</textarea>
+     				@ckeditor('bodyField', ['filebrowserImageUploadUrl' => '/image/upload'])
 			      @else
-			      <textarea name="content" placeholder="ex: 1.所有套餐優惠100元
+			      <textarea name="content" id="bodyField" placeholder="ex: 1.所有套餐優惠100元
       2.出示此app才可享有此優惠" class="form-control" required></textarea>
+      			@ckeditor('bodyField', ['filebrowserImageUploadUrl' => '/image/upload'])
 			      @endif
 			    </div>
 			  </div>
@@ -163,7 +165,7 @@
 @stop
 
 @section('script')
-<script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDaiFVrFBuxiar2jaPOJwYNSmFM9FKTyj8"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDaiFVrFBuxiar2jaPOJwYNSmFM9FKTyj8"></script>
 <script type="text/javascript">
 	$('#big_class').on('change', function(){
 		var big_id = $(this).val();
@@ -173,12 +175,7 @@
 	});
 
 	$(function (){
- 
-    function format_float(num, pos)
-    {
-        var size = Math.pow(10, pos);
-        return Math.round(num * size) / size;
-    }
+
  
     function preview(input, id) {
  
@@ -187,8 +184,6 @@
             
             reader.onload = function (e) {
                 $('#'+id).attr('src', e.target.result);
-                var KB = format_float(e.total / 1024, 2);
-                $('.size').text("檔案大小：" + KB + " KB");
             }
  
             reader.readAsDataURL(input.files[0]);

@@ -12,4 +12,9 @@ class ShopClassBig extends Model {
   {
     return $this->hasMany('App\Models\ShopClass', 'ShopClassBigid');
   }
+
+  public function shops()
+  {
+    return $this->hasMany('App\Models\Shop', 'shop_class_big_id');
+  }
 }

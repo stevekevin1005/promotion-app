@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Matriphe\Imageupload\ImageuploadServiceProvider::class,
+        JeroenNoten\LaravelCkEditor\ServiceProvider::class,
     ],
 
     /*

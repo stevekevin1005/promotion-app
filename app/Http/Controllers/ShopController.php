@@ -7,6 +7,7 @@ use App\Models\ShopClass;
 use App\Models\ShopClassBig;
 use App\Models\Shop;
 use Imageupload;
+use Illuminate\Database\QueryException;
 
 class ShopController extends Controller
 {
@@ -19,15 +20,18 @@ class ShopController extends Controller
 		$view_data['big_class_list'] = $big_class;
 
 		$class_id = $request->class;
+		$big_class = $request->big_class;
 
 		$shops = new Shop;
-		if(!is_null($class_id)){
-			$shop_list = $shops->where('shop_class_id', $class_id)->paginate(6);
+
+		if(!is_null($big_class)){
+			$shops = $shops->where('shop_class_big_id', $big_class);
 		}
-		else{
-			$shop_list = $shops->paginate(6);
+		if(!is_null($class_id)){
+			$shops = $shops->where('shop_class_id', $class_id);
 		}
 		
+		$shop_list = $shops->paginate(6);
 		$view_data['shop_list'] = $shop_list;
 
 		return view('shop.list', $view_data);
@@ -126,6 +130,9 @@ class ShopController extends Controller
 		catch(Exception $e){
 			return redirect('/shop/list')->withErrors(['msg'=>'新增失敗']);
 		}
+		catch(\Illuminate\Database\QueryException $e){
+			return redirect('/shop/list')->withErrors(['msg'=>'新增失敗']);
+		}
 	}
 
 	public function delete(Request $request)
@@ -175,6 +182,8 @@ class ShopController extends Controller
 		catch(Exception $e){
 			return redirect('/shop/list')->withErrors(['msg'=>'更改失敗']);
 		}
-		return dd($request);
+		catch(\Illuminate\Database\QueryException $e){
+			return redirect('/shop/list')->withErrors(['msg'=>'更改失敗']);
+		}
 	}
 }
