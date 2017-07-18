@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog Login</title>
+    <title>Promotion App</title>
     <style type="text/css">
     .fail {width:200px; margin: 20px auto; color: red;}
     form {font-size:16px; color:#999; font-weight: bold;}

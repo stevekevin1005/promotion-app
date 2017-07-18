@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth.login'], function () {
 
   Route::group(['prefix' => 'member'], function() {
       Route::get('list', ['uses' => 'MemberController@member_list', 'as' => 'member.list']);
+      Route::post('edit', ['uses' => 'MemberController@member_edit', 'as' => 'member.edit']);
   });
 });
 

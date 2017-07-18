@@ -8,7 +8,7 @@
   <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 	<title>推廣優惠後台</title>
 		<!-- Google-Fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600,700,900,400italic' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600,700,900,400italic' rel='stylesheet'>
 	<!-- Bootstrap Core CSS -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/prettify.css" />
@@ -37,7 +37,7 @@
 					<a href="/shop/list">商家管理</a>
 				</li>
 				<li>
-					<a href="/member/list">成員管理</a>
+					<a href="/member/list">密碼更改</a>
 				</li>
 			</ul>
 		</div>
