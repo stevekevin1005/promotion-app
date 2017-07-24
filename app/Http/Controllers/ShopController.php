@@ -63,8 +63,13 @@ class ShopController extends Controller
 	public function shop_list_api(Request $request, $id)
 	{
 		$shops = new Shop;
-		$shop_list = $shops->where('shop_class_id', $id)->get();
-
+		if($id == 0){
+			$shop_list = $shops->where('created_at', '>', date("Y/m/d", mktime(0, 0, 0, date('m')-1, date('d'), date('Y'))))->get();
+		}
+		else{
+			$shop_list = $shops->where('shop_class_id', $id)->get();
+		}
+		
 		$result = array();
 		foreach ($shop_list as $key => $shop) {
 			$obj['id'] = $shop->id;
