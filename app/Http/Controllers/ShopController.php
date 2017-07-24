@@ -139,8 +139,7 @@ class ShopController extends Controller
 	{
 		try{
 			$Shop = new Shop;
-			$Shop = $Shop->where('id', $request->id)->first();
-			$Shop->delete();
+			$Shop = $Shop->whereIn('id', $request->id)->delete();
 			return response()->json('刪除成功');
 		}
 		catch(Exception $e){

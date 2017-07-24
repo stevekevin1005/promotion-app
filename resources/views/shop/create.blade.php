@@ -151,9 +151,9 @@
 			    <div class="input-group">
 			      <div class="input-group-addon">備註</div>
 			      @if(isset($shop))
-			      <input name="remark" type="text" class="form-control" placeholder="ex: 台北市仁愛路三段6號" value="{{ $shop->remark }}" required>
+			      <input name="remark" type="text" class="form-control" placeholder="ex: 台北市仁愛路三段6號" value="{{ $shop->remark }}" >
 			      @else
-			      <input name="remark" type="text" class="form-control" placeholder="ex: 台北市仁愛路三段6號" required>
+			      <input name="remark" type="text" class="form-control" placeholder="ex: 台北市仁愛路三段6號" >
 			      @endif
 			    </div>
 			  </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,16 +18,17 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	@yield('style')
 </head>
-<body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">推廣優惠app後台</a>
+<body style="height: 100%;">
+	
+	<div id="wrapper"  style="min-height: 90%;position: relative;">
+		<nav class="navbar navbar-default navbar-fixed-top" style="height: 40px;box-sizing: border-box;">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">推廣優惠app後台</a>
+				</div>
 			</div>
-		</div>
-	</nav>
-	<div id="wrapper">
+		</nav>
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li>
@@ -39,17 +40,21 @@
 				<li>
 					<a href="/member/list">密碼更改</a>
 				</li>
+				<li>
+					<a href="/logout">登出</a>
+				</li>
 			</ul>
 		</div>
 		<div id="page-content-wrapper">
-			<div class="container-fluid">
+			<div class="container-fluid" style="padding-bottom: 40px;">
 			@yield('main_content')
 			</div>
 		</div>
-		<div class="text-center">
-			<p class="copy">Copyright © 2017 Stevia.</p>
-		</div>
+		<footer class="text-center" style="height: 40px;box-sizing: border-box;position: absolute;width: 100%; bottom: 0;">
+			<p class="copy">Copyright © 2017 stevia-network</p>
+		</footer>
 	</div>
+
 	<script src="/js/jquery.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/js/bootstrap.min.js"></script>

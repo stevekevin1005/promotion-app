@@ -33,9 +33,11 @@
 		</div>
 	</section>
 	<button class="btn btn-primary"><a href="/shop/create">建立優惠商家</a></button>
+	<button class="btn btn-danger" id="multi_shop_delete">刪除選擇店家</button>
 	<div class="row">
 		<table class="table table-striped" style="margin-top: 30px;">
 		 	<thead>
+		 		<th></th>
 		 		<th>主類別</th>
 		 		<th>次類別</th>
 		 		<th>商店名稱</th>
@@ -43,6 +45,7 @@
 		 	</thead>
 		 	@foreach ($shop_list as $shop)
       <tr>
+      	<td><input type="checkbox" value="{{ $shop->id}}" class="delete"></td>
       	<td>{{ $shop->big_class()->first()->name  }}</td>
       	<td>{{ $shop->small_class()->first()->name }}</td>
         <td>{{ $shop->name }}</td>
@@ -74,7 +77,7 @@
 		  	url: '/shop/delete',
 		  	type: 'post',
 		  	data: {
-		  		id: shop_id
+		  		id: [shop_id]
 		  	},
 		  	success: function(res){
 		  		alert(res);
@@ -87,5 +90,27 @@
 		  });
 		}
 	});	
+
+	$("#multi_shop_delete").on('click', function(){
+		var delete_id_array = $('.delete:checked').map(function() { return $(this).val(); }).get();
+		if (confirm("確定刪除這些店家嗎?"))
+		{
+		  $.ajax({
+		  	url: '/shop/delete',
+		  	type: 'post',
+		  	data: {
+		  		id: delete_id_array
+		  	},
+		  	success: function(res){
+		  		alert(res);
+		  		location.reload();
+		  	},
+		  	error: function(res){
+		  		alert(res);
+		  		location.reload();
+		  	}
+		  });
+		}
+	})
 </script>
 @stop
