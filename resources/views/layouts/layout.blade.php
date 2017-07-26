@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/prettify.css" />
 	<!-- Custom CSS -->
 	<link href="/css/styles.css" rel="stylesheet">
+	<link href="/css/icons.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	@yield('style')
@@ -25,7 +26,8 @@
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">推廣優惠app後台</a>
+					<a class="navbar-brand" href="#" id="header"><i class="md md-menu"></i>  推廣優惠app後台</a>
+					
 				</div>
 			</div>
 		</nav>
@@ -75,6 +77,14 @@
 		        headers: {
 		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		        }
+				});
+				$("#header").on('click', function(){
+					if($("#sidebar-wrapper").width() >= 250){
+						$("#sidebar-wrapper").width(0);
+					}	
+					else{
+						$("#sidebar-wrapper").width(250);
+					}
 				});
 		});
 	</script>
