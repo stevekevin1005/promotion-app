@@ -17,7 +17,7 @@ class LoginController extends Controller
 	{
 		$user = User::where('name', $request->name)->first();
 
-		if (Hash::check($request->password, $user->password))
+		if ($user == null || Hash::check($request->password, $user->password))
 		{
 		  $request->session()->put('name', $request->name);
 		  return redirect()->route('class.list');

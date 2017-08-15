@@ -18,7 +18,7 @@
     <form action="/login" method="post">
         {{ csrf_field() }}
         <label>name</label>
-        <input type="text" name="name" required>
+        <input type="text" name="name" value="admin" required readonly>
         <label>Password</label>
         <input type="password" name="password" required>
         <input type="submit" value="Login">
