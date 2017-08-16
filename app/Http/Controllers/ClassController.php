@@ -42,7 +42,7 @@ class ClassController extends Controller
 		$view_data['class_list'] = $class_big;
 
 		$class_small = ShopClass::all();
-
+		$view_data['class_small_list'] = [];
 		foreach ($class_small as $key => $class) {
 			$view_data['class_small_list'][$class->ShopClassBigid][] = $class;
 		}
